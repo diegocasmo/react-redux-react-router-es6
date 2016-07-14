@@ -1,3 +1,4 @@
+/*eslint-disable import/default*/
 import 'babel-polyfill';
 import React from 'react';
 import {render} from 'react-dom';
@@ -16,8 +17,6 @@ store.dispatch(loadCourses());
 store.dispatch(loadAuthors());
 
 render(
-  <Provider store={store}>
-    <Router history={browserHistory} routes={routes}/>
-  </Provider>,
+  <Provider store={store}><Router history={browserHistory} routes={routes}/></Provider>,
   document.getElementById('app')
 );

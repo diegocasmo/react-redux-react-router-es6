@@ -11,11 +11,18 @@
     "lint:watch": "npm run lint -- --watch",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "test": "mocha --reporter spec tools/testSetup.js \"src/**/*.spec.js\"",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "clean-dist": "npm run remove-dist && mkdir dist",
+    "remove-dist": "node_modules/.bin/rimraf ./dist",
+    "build:html": "babel-node tools/buildHtml.js",
+    "prebuild": "npm-run-all clean-dist test lint build:html",
+    "build": "babel-node tools/build.js",
+    "postbuild": "babel-node tools/distServer.js"
   },
   "dependencies": {
     "babel-polyfill": "6.8.0",
     "bootstrap": "3.3.6",
+    "cheerio": "^0.20.0",
     "jquery": "2.2.3",
     "react": "15.0.2",
     "react-dom": "15.0.2",
